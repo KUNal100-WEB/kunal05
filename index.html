@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunal | System Architect</title>
+    
+    <!-- Tailwind & AOS (Smooth Motion) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- iOS Style Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --card-bg: #0a0a0b;
+            --accent: #0a84ff;
+            --neon: #00d2ff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+        }
+
+        /* Mysterious Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .ios-glass {
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: saturate(180%) blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(180deg, #ffffff 0%, #0a84ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(10, 132, 255, 0.3);
+        }
+
+        .zoom-box {
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+        }
+        .zoom-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(10, 132, 255, 0);
+            transition: box-shadow 0.4s ease;
+        }
+        .zoom-box:hover {
+            transform: scale(1.03) translateY(-10px);
+            border-color: rgba(10, 132, 255, 0.3);
+        }
+        .zoom-box:hover::after {
+            box-shadow: 0 0 40px rgba(10, 132, 255, 0.15);
+        }
+
+        .btn-ios {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-ios::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-ios:hover::before {
+            left: 100%;
+        }
+        .btn-ios:active {
+            transform: scale(0.94);
+        }
+
+        .profile-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0b 0%, #000000 100%);
+            color: #0a84ff;
+            font-size: 8rem;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(10, 132, 255, 0.5);
+        }
+
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Mysterious Graphic Motion Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 px-6 py-6">
+        <div class="max-w-5xl mx-auto ios-glass rounded-[1.5rem] px-6 py-3 flex justify-between items-center transition-all duration-500" id="nav-container">
+            <a href="#" class="text-xl font-extrabold tracking-tighter glitch-hover">KUNAL<span class="text-[#0a84ff]">_SYS</span></a>
+            <div class="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a1a1a6]">
+                <a href="#home" class="hover:text-white transition-colors">Initiate</a>
+                <a href="#about" class="hover:text-white transition-colors">Core</a>
+                <a href="#projects" class="hover:text-white transition-colors">Deployments</a>
+            </div>
+            <a href="#contact" class="bg-[#0a84ff] text-white px-6 py-2.5 rounded-full text-[12px] font-black btn-ios shadow-xl">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right" data-aos-duration="1400">
+                <p class="text-[#0a84ff] font-bold text-xs mb-6 tracking-[0.4em] uppercase">Status: Online</p>
+                <h1 class="text-6xl lg:text-[90px] font-black mb-10 tracking-tighter leading-[0.85]">
+                    The <span class="gradient-text">Architect</span><br>Of <span class="gradient-text">Logic.</span>
+                </h1>
+                <p class="text-[#a1a1a6] text-lg max-w-xl mb-12 font-medium leading-relaxed border-l-2 border-[#0a84ff]/30 pl-6">
+                    I am a strategically driven student who focuses on building efficient systems for learning and growth. I believe in clarity over confusion, and execution over motivation. 
+                    <span class="block mt-4 text-white/80 italic">"Simplifying complexity is the ultimate sophistication."</span>
+                </p>
+                <div class="flex flex-wrap items-center gap-6">
+                    <a href="#projects" class="bg-white text-black px-10 py-5 rounded-2xl font-black btn-ios shadow-2xl">Access Data</a>
+                    <a href="#about" class="text-white/60 font-bold flex items-center group hover:text-white transition-colors">
+                        Protocol Strengths <i class="fas fa-arrow-right ml-3 text-xs group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative" data-aos="zoom-in" data-aos-duration="1800">
+                <div class="zoom-box relative z-10 w-full max-w-[420px] mx-auto aspect-[4/5] bg-[#0a0a0b] rounded-[3rem] overflow-hidden border border-[#0a84ff]/20 group shadow-2xl shadow-blue-500/10 flex items-center justify-center">
+                    <!-- Photo Display -->
+                    <img src="1000037481.jpg" alt="Kunal" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" id="profilePic">
+                    
+                    <!-- Fallback UI -->
+                    <div id="fallback" class="absolute inset-0 profile-fallback hidden">K</div>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-[#0a84ff] rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black text-white/40 tracking-[0.3em] uppercase">Biometric Verified</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mysterious Glow -->
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-600/20 rounded-full blur-[120px]"></div>
+                <div class="absolute -top-10 -left-10 w-64 h-64 bg-purple-600/10 rounded-full blur-[120px]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section id="about" class="py-32 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-24 text-center">
+                <span class="text-[#0a84ff] font-bold text-xs tracking-[0.5em] uppercase mb-4" data-aos="fade-up">System Core</span>
+                <h2 class="text-5xl font-black tracking-tight" data-aos="fade-up">My <span class="text-[#0a84ff]">Capabilities.</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="zoom-box ios-glass p-12 rounded-[2.5rem]" data-aos="fade-up">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-3xl flex items-center justify-center mb-8 border border-blue-500/20">
+                        <i class="fas fa-brain text-3xl text-[#0a84ff]"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 uppercase tracking-tighter">Deep Thinking</h3>
+                    <p class="text-[#a1a1a6] leading-relaxed text-sm">Root-cause analysis engine. Complex issues ko atomize karke solutions nikalna mera core function hai.</p>
+                </div>
+
+                <div class="zoom-box ios-glass p-12 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-3xl flex items-center justify-center mb-8 border border-purple-500/20">
+                        <i class="fas fa-fingerprint text-3xl text-[#bf5af2]"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 uppercase tracking-tighter">Pattern Recognition</h3>
+                    <p class="text-[#a1a1a6] leading-relaxed text-sm">Invisible data points ko connect karke efficient systems design karna. Main chaos mein structure dekhta hoon.</p>
+                </div>
+
+                <div class="zoom-box bg-gradient-to-br from-[#0a84ff]/20 to-transparent p-12 rounded-[2.5rem] border border-[#0a84ff]/30 flex flex-col justify-center" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-black uppercase tracking-tighter mb-4 italic">Structured Execution</h3>
+                    <p class="text-white/70 text-sm font-medium">Motivaton is temporary. Systems are permanent. Main execution systems build karta hoon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-black mb-20 tracking-tighter" data-aos="fade-right">Deployed <span class="text-[#0a84ff]">Systems_</span></h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="zoom-box group bg-[#0a0a0b] rounded-[3.5rem] overflow-hidden border border-white/5" data-aos="fade-up">
+                    <div class="h-64 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1550741111-c8071bd53ca4?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-125 transition-transform duration-1000" alt="Code">
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#0a84ff]/20 to-black"></div>
+                        <span class="text-8xl font-black text-white/5 uppercase select-none">CODE</span>
+                    </div>
+                    <div class="p-12">
+                        <div class="flex gap-2 mb-6">
+                            <span class="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-[10px] font-black uppercase tracking-widest">Scalable</span>
+                            <span class="px-3 py-1 bg-purple-500/10 text-purple-500 rounded-full text-[10px] font-black uppercase tracking-widest">Logic</span>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 tracking-tighter">System Architecture</h3>
+                        <p class="text-[#a1a1a6] mb-10">High-leverage growth systems for personal and technical scaling.</p>
+                        <div class="w-full h-px bg-white/5 mb-8"></div>
+                        <a href="#" class="text-xs font-black uppercase tracking-widest text-[#0a84ff] hover:text-white transition-colors">Decrypt Specs</a>
+                    </div>
+                </div>
+
+                <div class="zoom-box group bg-[#0a0a0b] rounded-[3.5rem] overflow-hidden border border-white/5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-64 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1510511459019-5dee997dd1db?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-125 transition-transform duration-1000" alt="Data">
+                        <div class="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-black"></div>
+                        <span class="text-8xl font-black text-white/5 uppercase select-none">DATA</span>
+                    </div>
+                    <div class="p-12">
+                        <div class="flex gap-2 mb-6">
+                            <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-[10px] font-black uppercase tracking-widest">Learning</span>
+                            <span class="px-3 py-1 bg-pink-500/10 text-pink-500 rounded-full text-[10px] font-black uppercase tracking-widest">Growth</span>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 tracking-tighter">Cognitive Growth</h3>
+                        <p class="text-[#a1a1a6] mb-10">Simplifying complex ideas through structured performance models.</p>
+                        <div class="w-full h-px bg-white/5 mb-8"></div>
+                        <a href="#" class="text-xs font-black uppercase tracking-widest text-[#bf5af2] hover:text-white transition-colors">Analyze Patterns</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-40 px-6 bg-gradient-to-t from-black to-transparent">
+        <div class="max-w-xl mx-auto text-center" data-aos="zoom-in">
+            <h2 class="text-6xl font-black mb-10 tracking-tighter">Let's <span class="text-[#0a84ff]">Build.</span></h2>
+            <div class="ios-glass p-12 rounded-[3.5rem]">
+                <div class="space-y-6">
+                    <input type="text" placeholder="Access Key / Name" class="w-full bg-black/50 border border-white/5 rounded-2xl p-5 focus:border-[#0a84ff] outline-none transition-all placeholder:text-white/10 font-bold">
+                    <textarea rows="4" placeholder="Brief your requirements..." class="w-full bg-black/50 border border-white/5 rounded-2xl p-5 focus:border-[#0a84ff] outline-none transition-all placeholder:text-white/10 font-bold"></textarea>
+                    <button class="w-full bg-[#0a84ff] text-white font-black py-5 rounded-2xl btn-ios shadow-2xl">Connect Node</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 text-center">
+        <p class="text-[#48484a] text-[10px] font-black tracking-[0.5em] uppercase">Built for Performance • Kunal © 2024</p>
+    </footer>
+
+    <script>
+        // Start all logic on Window Load
+        window.onload = function () {
+            // 1. Initialize AOS
+            AOS.init({ duration: 1000, once: true });
+
+            // 2. Profile Pic Error Handling (Fixing the null reference error)
+            const img = document.getElementById('profilePic');
+            const fallback = document.getElementById('fallback');
+            
+            if (img && fallback) {
+                img.onerror = function() {
+                    img.style.display = 'none';
+                    fallback.classList.remove('hidden');
+                };
+            }
+
+            // 3. Navigation Scroll Effect
+            const nav = document.getElementById('nav-container');
+            window.addEventListener('scroll', () => {
+                if (nav) {
+                    if (window.scrollY > 40) {
+                        nav.style.transform = 'scale(0.95)';
+                        nav.style.background = 'rgba(10, 10, 12, 0.95)';
+                    } else {
+                        nav.style.transform = 'scale(1)';
+                        nav.style.background = 'rgba(10, 10, 12, 0.8)';
+                    }
+                }
+            });
+
+            // 4. Start Background Animation
+            initCanvas();
+            animateCanvas();
+        }
+
+        // --- Canvas Animation System ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(10, 132, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 70; i++) particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                for (let j = index; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x;
+                    const dy = p.y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.strokeStyle = `rgba(10, 132, 255, ${0.15 - dist/150})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', () => {
+            if (canvas) initCanvas();
+        });
+    </script>
+</body>
+</html>
